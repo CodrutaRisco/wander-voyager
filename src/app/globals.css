@@ -1,42 +1,190 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* stylelint-disable selector-class-pattern */
+
+/* ============================================
+   Normalize CSS (essential rules inline)
+   ============================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  display: block;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+}
+
+/* ============================================
+   Custom Styles
+   ============================================ */
+
+:root {
+  --font-family: 'Buenos Aires', Avenir, Futura, Arial, SansSerif, sans-serif;
+  --link-colour: #00f;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+  --ds-font-weight-medium: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: initial;
+  font-size: initial;
 }
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
+  min-height: 100vh;
   box-sizing: border-box;
-  padding: 0;
+  font-family: 'Buenos Aires', Avenir, Futura, Arial, SansSerif, sans-serif;
+  font-size: 16px;
+  font-variant-ligatures: none;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  max-width: 100%;
+  box-sizing: inherit;
   margin: 0;
+  padding: 0;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a[target='_blank']:not(.storyblokRichTextBody a[target='_blank']) {
+  white-space: nowrap;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 800;
+  src: url('/fonts/BuenosAiresWeb-Black.eot');
+  src: url('/fonts/BuenosAiresWeb-Black.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-Black.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-Black.woff') format('woff');
+  unicode-range: U+000D-FB04;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: italic;
+  font-weight: 800;
+  src: url('/fonts/BuenosAiresWeb-BlackItalic.eot');
+  src: url('/fonts/BuenosAiresWeb-BlackItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-BlackItalic.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-BlackItalic.woff') format('woff');
+  unicode-range: U+000D-FB04;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: var(--ds-font-weight-semibold);
+  src: url('/fonts/BuenosAiresWeb-SemiBold.eot');
+  src: url('/fonts/BuenosAiresWeb-SemiBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-SemiBold.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-SemiBold.woff') format('woff');
+  unicode-range: U+000D-FB04;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: var(--ds-font-weight-bold);
+  src: url('/fonts/BuenosAiresWeb-Bold.eot');
+  src: url('/fonts/BuenosAiresWeb-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-Bold.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-Bold.woff') format('woff');
+  unicode-range: U+000D-FB04;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: italic;
+  font-weight: var(--ds-font-weight-bold);
+  src: url('/fonts/BuenosAiresWeb-BoldItalic.eot');
+  src: url('/fonts/BuenosAiresWeb-BoldItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-BoldItalic.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-BoldItalic.woff') format('woff');
+  unicode-range: U+000D-FB04;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: var(--ds-font-weight-medium);
+  src: url('/fonts/BuenosAiresWeb-Regular.eot');
+  src: url('/fonts/BuenosAiresWeb-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-Regular.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-Regular.woff') format('woff');
+  unicode-range: U+000D-FB04;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Buenos Aires';
+  font-stretch: normal;
+  font-style: italic;
+  font-weight: var(--ds-font-weight-medium);
+  src: url('/fonts/BuenosAiresWeb-RegularItalic.eot');
+  src: url('/fonts/BuenosAiresWeb-RegularItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/BuenosAiresWeb-RegularItalic.woff2') format('woff2'),
+    url('/fonts/BuenosAiresWeb-RegularItalic.woff') format('woff');
+  unicode-range: U+000D-FB04;
 }
