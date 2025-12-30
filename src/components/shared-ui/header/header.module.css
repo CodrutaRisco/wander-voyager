@@ -1,0 +1,46 @@
+.header {
+  width: 100%;
+  background-color: #fff;
+  border: 1px soli red;
+  background-color: red;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brandName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px 16px;
+  }
+
+  .brandName {
+    font-size: 18px;
+  }
+
+  .nav {
+    gap: 16px;
+  }
+}
