@@ -11,9 +11,11 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@storyblok/react": "^5.4.20",
     "next": "16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "storyblok-rich-text-react-renderer": "^3.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
