@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/shared-ui/header/header";
-import Nav from "@/components/shared-ui/navbar/nav";
+import { Header, Nav } from "@/components/shared-ui";
 
 export const metadata: Metadata = {
   title: "Wander Voyager",
