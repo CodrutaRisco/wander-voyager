@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/shared-ui/header/header";
+import Nav from "@/components/shared-ui/navbar/nav";
 
 export const metadata: Metadata = {
   title: "Wander Voyager",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <Header />
+        <Header>
+          <Nav />
+        </Header>
         {children}
       </body>
     </html>
