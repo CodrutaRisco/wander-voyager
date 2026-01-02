@@ -1,14 +1,15 @@
-import styles from "./page.module.css";
+import { getStoryblokApi } from '@/lib/storyblok';
+import { StoryblokStory } from '@storyblok/react/rsc';
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <div className={styles.intro}>
-          <h1>Hello Wander Voyager</h1>
-        </div>
-        <div className={styles.ctas}></div>
-      </main>
-    </div>
-  );
+async function fetchData() {
+  const storyblokApi = getStoryblokApi();
+  return storyblokApi.get('cdn/stories/homepage', {
+    version: 'draft',
+  });
+}
+
+export default async function Home() {
+  const { data } = await fetchData();
+
+  return <StoryblokStory story={data.story} />;
 }
