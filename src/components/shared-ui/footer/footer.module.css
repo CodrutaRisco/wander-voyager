@@ -1,8 +1,8 @@
-.header {
+.footer {
   width: 100%;
-  background-color: #fff;
-  border: 1px soli rgb(16, 115, 64);
   background-color: rgb(56, 115, 84);
+  color: #fff;
+  margin-top: auto;
 }
 
 .container {
@@ -11,7 +11,7 @@
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 24px;
 }
 
 .brand {
@@ -20,27 +20,31 @@
 }
 
 .brandName {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+.copyright {
+  font-size: 14px;
+  margin: 0;
 }
 
+/* Mobile responsive styles */
 @media (max-width: 768px) {
   .container {
-    padding: 12px 16px;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 16px;
+    text-align: center;
   }
 
   .brandName {
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  .nav {
-    gap: 16px;
+  .copyright {
+    font-size: 12px;
   }
 }
+
