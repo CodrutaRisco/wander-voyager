@@ -1,12 +1,16 @@
-import { storyblokEditable, StoryblokServerComponent } from '@storyblok/react/rsc';
+import {
+  storyblokEditable,
+  StoryblokServerComponent,
+  SbBlokData,
+} from '@storyblok/react/rsc';
 import { render } from 'storyblok-rich-text-react-renderer';
 
-interface HomePageBlok {
-  hero: Array<unknown>;
+interface HomePageBlok extends SbBlokData {
+  hero: SbBlokData[];
   intro: unknown;
-  descriereTara: Array<unknown>;
-  carusel: Array<unknown>;
-  videoComponent: Array<unknown>;
+  descriereTara: SbBlokData[];
+  carusel: SbBlokData[];
+  videoComponent: SbBlokData[];
 }
 
 interface HomePageProps {
@@ -19,7 +23,7 @@ const HomePage = ({ blok }: HomePageProps) => {
       {/* Hero Section - placeholder pentru acum */}
       <section style={{ padding: '20px', background: '#f0f0f0', marginBottom: '20px' }}>
         <p>🎯 Hero Section (placeholder)</p>
-        {blok.hero?.map((nestedBlok: any) => (
+        {blok.hero?.map((nestedBlok) => (
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </section>
@@ -33,7 +37,7 @@ const HomePage = ({ blok }: HomePageProps) => {
       {/* Descriere Tara - placeholder */}
       <section style={{ padding: '20px', background: '#f5f5f5', marginBottom: '20px' }}>
         <p>🌍 Descriere Tara (placeholder)</p>
-        {blok.descriereTara?.map((nestedBlok: any) => (
+        {blok.descriereTara?.map((nestedBlok) => (
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </section>
@@ -41,7 +45,7 @@ const HomePage = ({ blok }: HomePageProps) => {
       {/* Carusel - placeholder */}
       <section style={{ padding: '20px', background: '#f0f0f0', marginBottom: '20px' }}>
         <p>🎠 Carusel (placeholder)</p>
-        {blok.carusel?.map((nestedBlok: any) => (
+        {blok.carusel?.map((nestedBlok) => (
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </section>
@@ -49,7 +53,7 @@ const HomePage = ({ blok }: HomePageProps) => {
       {/* Video Component - placeholder */}
       <section style={{ padding: '20px', background: '#f5f5f5', marginBottom: '20px' }}>
         <p>🎬 Video Component (placeholder)</p>
-        {blok.videoComponent?.map((nestedBlok: any) => (
+        {blok.videoComponent?.map((nestedBlok) => (
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </section>
