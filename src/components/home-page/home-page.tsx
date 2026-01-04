@@ -1,7 +1,7 @@
 import styles from "./home-page.module.css";
 import type { HomePageFeatureProps } from "./types";
 import { renderRichText } from "@/lib/rich-text-renderer";
-import { Hero, Gallery } from "@/components/shared-ui";
+import { Hero, Gallery, Video } from "@/components/shared-ui";
 
 export function HomePage({ story }: HomePageFeatureProps) {
   const { content } = story;
@@ -42,6 +42,17 @@ export function HomePage({ story }: HomePageFeatureProps) {
 
         {/* Gallery/Carousel Section */}
         {content.carusel?.[0] && <Gallery images={content.carusel[0].images} />}
+
+        {/* Video Section */}
+        {content.videoComponent?.[0] && (
+          <Video
+            title={content.videoComponent[0].title}
+            subtitle={content.videoComponent[0].subtitle}
+            video={content.videoComponent[0].video}
+            image={content.videoComponent[0].image}
+            description={content.videoComponent[0].description}
+          />
+        )}
 
         <div className={styles.ctas}></div>
       </main>
