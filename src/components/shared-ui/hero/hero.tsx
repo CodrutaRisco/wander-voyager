@@ -1,13 +1,11 @@
 import Image from "next/image";
 import styles from "./hero.module.css";
+import { StoryblokImage } from "@/types";
 
 interface HeroProps {
   title: string;
   subtitle?: string;
-  image?: {
-    filename: string;
-    alt?: string;
-  };
+  image: StoryblokImage;
 }
 
 export function Hero({ title, subtitle, image }: HeroProps) {

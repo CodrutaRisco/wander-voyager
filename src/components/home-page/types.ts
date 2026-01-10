@@ -1,35 +1,34 @@
-// Tipuri pentru datele din Storyblok HomePage
+// Types for the Storyblok HomePage
+import { StoryblokImage, StoryblokRichtext, StoryblokStory } from "@/types";
+
+// Re-export for compatibility
+export type { StoryblokImage, StoryblokRichtext } from "@/types";
 
 export interface HeroBlock {
   _uid: string;
   title: string;
   subtitle: string;
-  image: {
-    filename: string;
-    alt: string;
-  };
+  image: StoryblokImage;
   component: string;
 }
 
 export interface GalleryImageBlock {
   _uid: string;
-  image: {
-    filename: string;
-    alt: string;
-  };
-  component: string;
+  image: StoryblokImage;
+  title: string;
+  component: "galleryImage";
 }
 
 export interface GalleryBlock {
   _uid: string;
   images: GalleryImageBlock[];
-  component: string;
+  component: "Gallery";
 }
 
 export interface TileAndRichTextBlock {
   _uid: string;
   title: string;
-  richText: unknown; // Storyblok Richtext
+  richText: StoryblokRichtext;
   component: string;
 }
 
@@ -40,33 +39,22 @@ export interface VideoComponentBlock {
   video: {
     filename: string;
   };
-  image: {
-    filename: string;
-    alt: string;
-  };
-  description: unknown; // Storyblok Richtext
+  image: StoryblokImage;
+  description: StoryblokRichtext;
   component: string;
 }
 
 export interface HomePageContent {
   _uid: string;
   hero: HeroBlock[];
-  intro: unknown; // Storyblok Richtext
-  descriereTara: TileAndRichTextBlock[];
-  carusel: GalleryBlock[];
-  videoComponent: VideoComponentBlock[];
+  intro: [TileAndRichTextBlock];
+  carusel: [GalleryBlock];
+  videoComponent: [VideoComponentBlock];
   component: string;
 }
 
-export interface HomePageStory {
-  name: string;
-  slug: string;
-  full_slug: string;
-  content: HomePageContent;
-}
+export type HomePageStory = StoryblokStory<HomePageContent>;
 
 export interface HomePageFeatureProps {
   story: HomePageStory;
 }
-
-
