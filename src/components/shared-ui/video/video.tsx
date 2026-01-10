@@ -6,7 +6,9 @@ interface VideoProps {
   title: string;
   subtitle?: string;
   video?: {
-    filename: string;
+    url?: string;
+    cached_url?: string;
+    filename?: string;
   };
   image?: {
     filename: string;
@@ -15,8 +17,37 @@ interface VideoProps {
   description?: unknown;
 }
 
-export function Video({ title, subtitle, video, image, description }: VideoProps) {
+// Extract video ID from Vimeo or YouTube URL
+function getEmbedUrl(url: string): string | null {
+  // Vimeo: https://vimeo.com/1152897368
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  }
+
+  // YouTube: https://www.youtube.com/watch?v=VIDEO_ID or https://youtu.be/VIDEO_ID
+  const youtubeMatch = url.match(
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/
+  );
+  if (youtubeMatch) {
+    return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
+  }
+
+  return null;
+}
+
+export function Video({
+  title,
+  subtitle,
+  video,
+  image,
+  description,
+}: VideoProps) {
   const descriptionContent = description ? renderRichText(description) : null;
+
+  // Get video URL from link or asset
+  const videoUrl = video?.url || video?.cached_url || video?.filename || "";
+  const embedUrl = videoUrl ? getEmbedUrl(videoUrl) : null;
 
   return (
     <section className={styles.videoSection}>
@@ -28,16 +59,23 @@ export function Video({ title, subtitle, video, image, description }: VideoProps
       <div className={styles.content}>
         {/* Video or Thumbnail */}
         <div className={styles.mediaWrapper}>
-          {video?.filename ? (
-            <video
-              className={styles.video}
-              controls
-              poster={image?.filename}
-            >
+          {embedUrl ? (
+            // Vimeo/YouTube embed
+            <iframe
+              src={embedUrl}
+              className={styles.iframe}
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              title={title}
+            />
+          ) : video?.filename ? (
+            // Direct video file
+            <video className={styles.video} controls poster={image?.filename}>
               <source src={video.filename} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           ) : image?.filename ? (
+            // Fallback to thumbnail
             <Image
               src={image.filename}
               alt={image.alt || title}
@@ -49,9 +87,7 @@ export function Video({ title, subtitle, video, image, description }: VideoProps
 
         {/* Description */}
         {descriptionContent && (
-          <div className={styles.description}>
-            {descriptionContent}
-          </div>
+          <div className={styles.description}>{descriptionContent}</div>
         )}
       </div>
     </section>
@@ -59,4 +95,3 @@ export function Video({ title, subtitle, video, image, description }: VideoProps
 }
 
 export default Video;
-

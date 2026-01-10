@@ -7,15 +7,8 @@ export function HomePage({ story }: HomePageFeatureProps) {
   const { content } = story;
 
   // Test - verify data is arriving
-  console.log("Story name:", story.name);
-  console.log("Hero title:", content.hero?.[0]?.title);
-  console.log("content", content);
-
-  const introText = renderRichText(content.intro);
-  const countryDescriptionTitle = content.descriereTara?.[0]?.title;
-  const countryDescriptionText = renderRichText(
-    content.descriereTara?.[0]?.richText
-  );
+ const introText = renderRichText(content.intro?.[0]?.richText);
+ const introTitle = content.intro?.[0]?.title;
 
   return (
     <div className={styles.page}>
@@ -30,13 +23,10 @@ export function HomePage({ story }: HomePageFeatureProps) {
         )}
 
         {/* Intro Section - RichText */}
-        <section className={styles.section}>{introText}</section>
-
-        {/* Country Description Section - RichText */}
-        {content.descriereTara?.[0] && (
+        {content.intro?.[0] && (
           <section className={styles.section}>
-            <h2>{countryDescriptionTitle}</h2>
-            {countryDescriptionText}
+            <h2>{introTitle}</h2>
+            {introText}
           </section>
         )}
 
