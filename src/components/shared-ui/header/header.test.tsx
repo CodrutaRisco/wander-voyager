@@ -50,10 +50,11 @@ describe("Header Component", () => {
     expect(nav).toBeEmptyDOMElement();
   });
 
-  it("has the brand name inside brand container", () => {
+  it("has the brand name as a link to home page", () => {
     render(<Header />);
-    const brandName = screen.getByText("Wander Voyager");
-    expect(brandName.tagName.toLowerCase()).toBe("span");
+    const brandLink = screen.getByRole("link", { name: "Wander Voyager" });
+    expect(brandLink).toBeInTheDocument();
+    expect(brandLink).toHaveAttribute("href", "/");
   });
 
   it("renders with correct semantic structure", () => {
