@@ -1,8 +1,11 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #fff;
-  border: 1px soli rgb(16, 115, 64);
-  background-color: rgb(56, 115, 84);
+  background-color: transparent;
+  z-index: 100;
+  transition: background-color 0.3s ease;
 }
 
 .container {

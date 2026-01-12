@@ -11,18 +11,19 @@ export function HomePage({ story }: HomePageFeatureProps) {
  const introTitle = content.intro?.[0]?.title;
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        {/* Hero Section */}
-        {content.hero?.[0] && (
-          <Hero
-            title={content.hero[0].title}
-            subtitle={content.hero[0].subtitle}
-            image={content.hero[0].image}
-          />
-        )}
+    <>
+      {/* Hero Section - outside container for full-width */}
+      {content.hero?.[0] && (
+        <Hero
+          title={content.hero[0].title}
+          subtitle={content.hero[0].subtitle}
+          image={content.hero[0].image}
+        />
+      )}
 
-        {/* Intro Section - RichText */}
+      <div className={styles.page}>
+        <main className={styles.main}>
+          {/* Intro Section - RichText */}
         {content.intro?.[0] && (
           <section className={styles.section}>
             <h2>{introTitle}</h2>
@@ -44,8 +45,9 @@ export function HomePage({ story }: HomePageFeatureProps) {
           />
         )}
 
-        <div className={styles.ctas}></div>
-      </main>
-    </div>
+          <div className={styles.ctas}></div>
+        </main>
+      </div>
+    </>
   );
 }

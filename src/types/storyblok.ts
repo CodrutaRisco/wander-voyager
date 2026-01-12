@@ -106,3 +106,28 @@ export interface StoryblokTitleAndRichText {
     component: 'tileAndRichText';
 }
 
+// ==================== SEO Types ====================
+
+export interface StoryblokSeo {
+    _uid: string;
+    title: string;
+    description: string;
+    og_title?: string;
+    og_description?: string;
+    og_image?: StoryblokImage;
+    twitter_title?: string;
+    twitter_description?: string;
+    twitter_image?: StoryblokImage;
+    component: 'seo';
+}
+
+// ==================== Hero Types ====================
+
+export interface StoryblokHero {
+    _uid: string;
+    title: string;
+    subtitle?: string;
+    image: StoryblokImage;
+    component: 'hero';
+}
+
