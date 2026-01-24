@@ -1,16 +1,5 @@
 // Types for the Storyblok HomePage
-import { StoryblokImage, StoryblokRichtext, StoryblokStory } from "@/types";
-
-// Re-export for compatibility
-export type { StoryblokImage, StoryblokRichtext } from "@/types";
-
-export interface HeroBlock {
-  _uid: string;
-  title: string;
-  subtitle: string;
-  image: StoryblokImage;
-  component: string;
-}
+import { StoryblokImage, StoryblokRichtext, StoryblokStory, StoryblokHero  } from "@/types";
 
 export interface GalleryImageBlock {
   _uid: string;
@@ -46,7 +35,7 @@ export interface VideoComponentBlock {
 
 export interface HomePageContent {
   _uid: string;
-  hero: HeroBlock[];
+  hero: [StoryblokHero];
   intro: [TileAndRichTextBlock];
   carusel: [GalleryBlock];
   videoComponent: [VideoComponentBlock];

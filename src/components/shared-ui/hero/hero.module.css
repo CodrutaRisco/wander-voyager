@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-bottom: 2rem;
   /* No margin - hero starts at top, image goes under fixed header */
 }
 
