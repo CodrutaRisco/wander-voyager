@@ -1,7 +1,7 @@
 import { WorldCultureBlock } from "../types";
 import Image from "next/image";
 import { renderRichText } from "@/lib/rich-text-renderer";
-import styles from "./werld-culture.module.css";
+import styles from "./world-culture.module.css";
 
 export function WorldCulture({ title, subtitle, icon, text }: WorldCultureBlock) {
   return (
