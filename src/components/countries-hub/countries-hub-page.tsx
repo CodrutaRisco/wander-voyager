@@ -4,23 +4,29 @@ import styles from "./countries-hub-page.module.css";
 import { renderRichText } from "@/lib/rich-text-renderer";
 import Image from "next/image";
 import { WorldCulture } from "./world-culture/world-culture";
-
+import { ComponentWrapper } from "@/components/shared-ui";
 export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
   const { content } = story;
 
+  const heroCountriesHub = content.CountriesHero?.[0];
+  const introCountriesHub = content.intro;
+  const worldCultureCountriesHub = content.worldCulture;
+  const countriesListCountriesHub = content.countriesList;
+  const countriesFooterCountriesHub = content.countriesFooter;
+
   return (
-    <div className={styles.page}>
+    <>
       {/* Hero Section */}
-      {content.CountriesHero?.[0] && (
+      {heroCountriesHub  && (
         <Hero
           title={content.CountriesHero[0].title}
           subtitle={content.CountriesHero[0].subtitle}
           image={content.CountriesHero[0].image}
         />
       )}
-
+ <ComponentWrapper>
       {/* Intro Section */}
-      {content.intro && (
+      {introCountriesHub && (
         <section className={styles.intro}>
           <div className={styles.introContent}>
             {renderRichText(content.intro)}
@@ -29,10 +35,10 @@ export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
       )}
 
       {/* World Culture Section */}
-      {content.worldCulture && content.worldCulture.length > 0 && (
+      {worldCultureCountriesHub && worldCultureCountriesHub.length > 0 && (
         <section className={styles.worldCulture}>
           <div className={styles.cultureGrid}>
-            {content.worldCulture.map((item) => (
+            {worldCultureCountriesHub.map((item) => (
             <WorldCulture key={item._uid} {...item} />
             ))}
           </div>
@@ -40,11 +46,11 @@ export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
       )}
 
       {/* Countries List Section */}
-      {content.countriesList && content.countriesList.length > 0 && (
+      {countriesListCountriesHub && countriesListCountriesHub.length > 0 && (
         <section className={styles.countriesList}>
           <h2 className={styles.sectionTitle}>Explore Countries</h2>
           <div className={styles.countriesGrid}>
-            {content.countriesList.map((country) => (
+            {countriesListCountriesHub.map((country) => (
               <article key={country._uid} className={styles.countryCard}>
                 <div className={styles.countryImageWrapper}>
                   <Image
@@ -65,13 +71,14 @@ export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
       )}
 
       {/* Footer Section */}
-      {content.countriesFooter && (
+      {countriesFooterCountriesHub && (
         <section className={styles.footer}>
           <div className={styles.footerContent}>
-            {renderRichText(content.countriesFooter)}
+            {renderRichText(countriesFooterCountriesHub)}
           </div>
         </section>
       )}
-    </div>
+    </ComponentWrapper>
+    </>
   );
 }
