@@ -1,0 +1,1 @@
+export { CountriesHubPageFeature as default } from "@/components/countries-hub";

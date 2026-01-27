@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { HomePage } from "./home-page";
 import { HomePageStory } from "./types";
+import type { StoryblokRichtext, StoryblokRichtextContent, StoryblokHero } from "@/types";
 
 // Mock next/image
 jest.mock("next/image", () => ({
@@ -34,6 +35,9 @@ jest.mock("@/components/shared-ui", () => ({
   Video: ({ title }: { title: string }) => (
     <div data-testid="video">Video: {title}</div>
   ),
+  ComponentWrapper: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="component-wrapper">{children}</div>
+  ),
 }));
 
 const mockImage = {
@@ -50,12 +54,12 @@ const mockImage = {
   is_external_url: false,
 };
 
-const mockRichText = {
-  type: "doc" as const,
+const mockRichText: StoryblokRichtext = {
+  type: "doc",
   content: [
     {
-      type: "paragraph" as const,
-      content: [{ type: "text", text: "Test paragraph" }],
+      type: "paragraph",
+      content: [{ type: "text" as never, text: "Test paragraph" }] as StoryblokRichtextContent[],
     },
   ],
 };
@@ -76,7 +80,7 @@ const createMockStory = (overrides = {}): HomePageStory => ({
         title: "Welcome to Wander Voyager",
         subtitle: "Explore the world",
         image: mockImage,
-        component: "GenericHero",
+        component: "hero",
       },
     ],
     intro: [
@@ -154,8 +158,9 @@ describe("HomePage Component", () => {
   });
 
   it("does not render Hero when hero array is empty", () => {
-    const story = createMockStory();
-    story.content.hero = [];
+    const story = createMockStory({
+      hero: [] as unknown as [StoryblokHero],
+    });
     render(<HomePage story={story} />);
     
     expect(screen.queryByTestId("hero")).not.toBeInTheDocument();

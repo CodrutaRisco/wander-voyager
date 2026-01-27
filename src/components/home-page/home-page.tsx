@@ -2,7 +2,7 @@ import styles from "./home-page.module.css";
 import type { HomePageFeatureProps } from "./types";
 import { renderRichText } from "@/lib/rich-text-renderer";
 import { Hero, Gallery, Video } from "@/components/shared-ui";
-
+import { ComponentWrapper } from "@/components/shared-ui";
 export function HomePage({ story }: HomePageFeatureProps) {
   const { content } = story;
 
@@ -21,8 +21,7 @@ export function HomePage({ story }: HomePageFeatureProps) {
         />
       )}
 
-      <div className={styles.page}>
-        <main className={styles.main}>
+     <ComponentWrapper>
           {/* Intro Section - RichText */}
         {content.intro?.[0] && (
           <section className={styles.section}>
@@ -46,8 +45,7 @@ export function HomePage({ story }: HomePageFeatureProps) {
         )}
 
           <div className={styles.ctas}></div>
-        </main>
-      </div>
+        </ComponentWrapper>
     </>
   );
 }
