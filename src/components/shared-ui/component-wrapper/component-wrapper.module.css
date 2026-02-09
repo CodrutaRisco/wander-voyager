@@ -15,10 +15,5 @@
   align-items: flex-start;
   background-color: var(--color-foreground);
   padding: 0 24px;
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: var(--spacing-page-mobile);
-  }
+  gap: 3rem;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { CountriesHubPage } from "./countries-hub-page";
 import { CountriesHubPageStory } from "./types";
-import type { StoryblokRichtext } from "@/types";
+import type { StoryblokRichtext, StoryblokRichtextContentType } from "@/types";
 
 // Mock next/image
 jest.mock("next/image", () => ({
@@ -60,7 +60,12 @@ const mockRichText: StoryblokRichtext = {
   content: [
     {
       type: "paragraph",
-      content: [{ type: "text" as any, text: "Test paragraph" }],
+      content: [
+        {
+          type: "text" as StoryblokRichtextContentType,
+          text: "Test paragraph",
+        },
+      ],
     },
   ],
 };

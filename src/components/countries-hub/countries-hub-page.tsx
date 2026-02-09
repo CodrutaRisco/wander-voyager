@@ -39,11 +39,13 @@ export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
         {/* World Culture Section */}
         {worldCultureCountriesHub && worldCultureCountriesHub.length > 0 && (
           <section className={styles.worldCulture}>
-            <div className={styles.cultureGrid}>
-              {worldCultureCountriesHub.map((item) => (
-                <WorldCulture key={item._uid} {...item} />
-              ))}
-            </div>
+            {worldCultureCountriesHub.map((item) => (
+              <WorldCulture
+                key={item._uid}
+                {...item}
+                component="WorldCulture"
+              />
+            ))}
           </section>
         )}
 
