@@ -3,6 +3,8 @@ import type { HomePageFeatureProps } from "./types";
 import { renderRichText } from "@/lib/rich-text-renderer";
 import { Hero, Gallery, Video } from "@/components/shared-ui";
 import { ComponentWrapper } from "@/components/shared-ui";
+
+
 export function HomePage({ story }: HomePageFeatureProps) {
   const { content } = story;
 
@@ -21,11 +23,11 @@ export function HomePage({ story }: HomePageFeatureProps) {
         />
       )}
 
-     <ComponentWrapper>
-          {/* Intro Section - RichText */}
+      <ComponentWrapper>
+        {/* Intro Section - RichText */}
         {content.intro?.[0] && (
-          <section className={styles.section}>
-            <h2>{introTitle}</h2>
+          <section className={styles.introText}>
+            <h2 className={styles.introTitle}>{introTitle}</h2>
             {introText}
           </section>
         )}
@@ -43,9 +45,7 @@ export function HomePage({ story }: HomePageFeatureProps) {
             description={content.videoComponent[0].description}
           />
         )}
-
-          <div className={styles.ctas}></div>
-        </ComponentWrapper>
+      </ComponentWrapper>
     </>
   );
 }
