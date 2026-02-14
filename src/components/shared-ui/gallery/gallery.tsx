@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./gallery.module.css";
+import { ImageCarousel } from "../image-carousel/image-carousel";
 
 interface GalleryImage {
   _uid: string;
@@ -20,18 +21,7 @@ export function Gallery({ images, title }: GalleryProps) {
   return (
     <section className={styles.gallery}>
       {title && <h2 className={styles.title}>{title}</h2>}
-      <div className={styles.grid}>
-        {images.map((item) => (
-          <div key={item._uid} className={styles.imageWrapper}>
-            <Image
-              src={item.image.filename}
-              alt={item.image.alt || "Gallery image"}
-              fill
-              className={styles.image}
-            />
-          </div>
-        ))}
-      </div>
+      <ImageCarousel images={images} />
     </section>
   );
 }
