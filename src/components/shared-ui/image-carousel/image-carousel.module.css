@@ -1,0 +1,107 @@
+.carousel {
+    width: 100%;
+  }
+  
+  /* === Scene & viewport === */
+  .scene {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  
+  .viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+  
+  /* === Track & slides === */
+  .track {
+    display: flex;
+    height: 100%;
+    transition: transform 320ms ease-in-out;
+    will-change: transform;
+  }
+  
+  .slide {
+    position: relative;
+    flex: 0 0 100%;
+    height: 100%;
+  }
+  
+  /* === Image === */
+  .image {
+    object-fit: cover;
+  }
+  
+  /* === Navigation arrows === */
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+  
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+  
+    display: grid;
+    place-items: center;
+  }
+  
+  .left {
+    left: 12px;
+  }
+  
+  .right {
+    right: 12px;
+  }
+  
+  .icon {
+    color: white;
+    font-size: 18px;
+    line-height: 1;
+  }
+  
+  /* === Dots === */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: none;
+    background: black;
+    opacity: 0.35;
+    cursor: pointer;
+    transition: opacity 150ms ease;
+  }
+  
+  .dotActive {
+    opacity: 1;
+  }
+  
+  /* === Accessibility & hover === */
+  .nav:hover,
+  .dot:hover {
+    opacity: 0.85;
+  }
+  
+  .nav:focus-visible,
+  .dot:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+  
+  /* === Responsive*
+  
