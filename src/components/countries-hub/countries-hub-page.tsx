@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Hero } from "../shared-ui";
 import type { CountriesHubPageFeatureProps } from "./types";
 import styles from "./countries-hub-page.module.css";
@@ -5,6 +6,16 @@ import { renderRichText } from "@/lib/rich-text-renderer";
 import { CountrieCard } from "../countrie-card/countrie-card";
 import { WorldCulture } from "./world-culture/world-culture";
 import { ComponentWrapper } from "@/components/shared-ui";
+
+function getCountrySlug(country: { countrieName: string; slug?: string }): string {
+  if (country.slug) return country.slug;
+  return country.countrieName
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
+}
 
 
 export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
@@ -55,7 +66,13 @@ export function CountriesHubPage({ story }: CountriesHubPageFeatureProps) {
             <h2 className={styles.sectionTitle}>Explore Countries</h2>
             <div className={styles.countriesGrid}>
               {countriesListCountriesHub.map((country) => (
-                <CountrieCard key={country._uid} {...country} />
+                <Link
+                  key={country._uid}
+                  href={`/countries/${getCountrySlug(country)}`}
+                  className={styles.countryCardLink}
+                >
+                  <CountrieCard {...country} />
+                </Link>
               ))}
             </div>
           </section>

@@ -14,6 +14,7 @@ export interface CountrieCardBlock {
   countrieName: string;
   subtitle: string;
   image: StoryblokImage;
+  slug?: string;
   component: "CountrieCard";
 }
 

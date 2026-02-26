@@ -6,9 +6,15 @@ interface HeroProps {
   title: string;
   subtitle?: string;
   image: StoryblokImage;
+  children?: React.ReactNode;
 }
 
-export function Hero({ title, subtitle, image }: HeroProps) {
+export function Hero({
+  title,
+  subtitle,
+  image,
+  children = undefined,
+}: HeroProps) {
   return (
     <section className={styles.hero}>
       {image?.filename && (
@@ -24,6 +30,7 @@ export function Hero({ title, subtitle, image }: HeroProps) {
       <div className={styles.content}>
         <h1 className={styles.title}>{title}</h1>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        {children}
       </div>
     </section>
   );
