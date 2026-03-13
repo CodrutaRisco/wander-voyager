@@ -32,46 +32,43 @@ const mockImage = {
 };
 
 const createMockCountryStory = (overrides = {}): CountryPageStory => ({
+  full_slug: "countries/romania",
   id: 123,
   uuid: "test-uuid",
   name: "romania",
   slug: "romania",
   created_at: "2024-01-01",
   published_at: "2024-01-01",
-  alternates: [],
-  default_full_slug: "countries/romania",
-  full_slug: "countries/romania",
-  group_id: "group-123",
-  is_startpage: false,
-  meta_data: null,
-  parent_id: null,
-  position: 0,
-  release_id: null,
-  sort_by_date: null,
-  tag_list: [],
-  translated_slugs: null,
+  updated_at: "2024-01-01",
   content: {
     _uid: "test-uid",
     component: "CountryPage",
-    hero: [{
-      hero: [{
-        _uid: "hero-uid",
-        title: "Romania",
-        subtitle: "Beautiful Eastern European country",
-        image: mockImage,
-        component: "Hero",
-      }],
-      capital: "Bucharest",
-      population: "19 million",
-      currency: "Lei",
-      language: "Romanian",
-    }],
-    intro: [{
-      _uid: "intro-uid",
-      title: "About Romania",
-      richText: { type: "doc", content: [] },
-      component: "TileAndRichText",
-    }],
+    hero: [
+      {
+        hero: [
+          {
+            _uid: "hero-uid",
+            title: "Romania",
+            subtitle: "Beautiful Eastern European country",
+            image: mockImage,
+            component: "hero",
+          },
+        ],
+        capital: "Bucharest",
+        population: "19 million",
+        currency: "Lei",
+        language: "Romanian",
+      },
+    ],
+    intro: [
+      {
+        _uid: "intro-uid",
+        title: "About Romania",
+        richText: { type: "doc", content: [] },
+        component: "tileAndRichText",
+      },
+    ],
+    curiosities: [],
     details: "Quick Facts",
     language: "Romanian",
     time: "UTC+2",
@@ -85,15 +82,17 @@ describe("CountryPage Component", () => {
   it("renders country page with all sections", () => {
     const story = createMockCountryStory();
     render(<CountryPage story={story} />);
-    
+
     // Check if hero section is rendered
     expect(screen.getByText("Romania")).toBeInTheDocument();
-    expect(screen.getByText("Beautiful Eastern European country")).toBeInTheDocument();
-    
+    expect(
+      screen.getByText("Beautiful Eastern European country"),
+    ).toBeInTheDocument();
+
     // Check if intro section is rendered
     expect(screen.getByText("About Romania")).toBeInTheDocument();
     expect(screen.getByTestId("rich-text-content")).toBeInTheDocument();
-    
+
     // Check if quick details are rendered
     expect(screen.getByText("Quick Facts")).toBeInTheDocument();
   });
@@ -101,7 +100,7 @@ describe("CountryPage Component", () => {
   it("renders hero fields correctly", () => {
     const story = createMockCountryStory();
     render(<CountryPage story={story} />);
-    
+
     expect(screen.getByText("Capital:")).toBeInTheDocument();
     expect(screen.getByText("Bucharest")).toBeInTheDocument();
     expect(screen.getByText("Population:")).toBeInTheDocument();
@@ -115,7 +114,7 @@ describe("CountryPage Component", () => {
   it("renders quick details fields correctly", () => {
     const story = createMockCountryStory();
     render(<CountryPage story={story} />);
-    
+
     expect(screen.getByText("Official language")).toBeInTheDocument();
     expect(screen.getAllByText("Romanian")).toHaveLength(2); // One in hero, one in quick details
     expect(screen.getByText("Time zone")).toBeInTheDocument();
@@ -130,12 +129,12 @@ describe("CountryPage Component", () => {
     const story = createMockCountryStory({
       hero: [],
     });
-    
+
     const { container } = render(<CountryPage story={story} />);
     expect(container.firstChild).toBeNull();
   });
 
-  it("renders without intro section when intro is missing", () => {
+  it("renders without intro section when intro and details are missing", () => {
     const story = createMockCountryStory({
       intro: [],
       details: "",
@@ -144,31 +143,34 @@ describe("CountryPage Component", () => {
       phone: "",
       domain: "",
     });
-    
+
     render(<CountryPage story={story} />);
-    
+
     // Hero should still be rendered
     expect(screen.getByText("Romania")).toBeInTheDocument();
-    
+
     // Intro section should not be rendered
     expect(screen.queryByText("About Romania")).not.toBeInTheDocument();
+    expect(screen.queryByText("Official language")).not.toBeInTheDocument();
   });
 
   it("renders intro without title when title is missing", () => {
     const story = createMockCountryStory({
-      intro: [{
-        _uid: "intro-uid",
-        title: "",
-        richText: { type: "doc", content: [] },
-        component: "TileAndRichText",
-      }],
+      intro: [
+        {
+          _uid: "intro-uid",
+          title: "",
+          richText: { type: "doc", content: [] },
+          component: "TileAndRichText",
+        },
+      ],
     });
-    
+
     render(<CountryPage story={story} />);
-    
+
     // Rich text content should still be rendered
     expect(screen.getByTestId("rich-text-content")).toBeInTheDocument();
-    
+
     // Intro title should not be rendered (only Quick Facts title should exist)
     expect(screen.queryByText("About Romania")).not.toBeInTheDocument();
   });
@@ -178,9 +180,9 @@ describe("CountryPage Component", () => {
       language: undefined,
       Language: "Romanian (Capital L)",
     });
-    
+
     render(<CountryPage story={story} />);
-    
+
     expect(screen.getByText("Romanian (Capital L)")).toBeInTheDocument();
     // Verify the quick details section shows the capital L version
     expect(screen.getByText("Official language")).toBeInTheDocument();
@@ -190,19 +192,27 @@ describe("CountryPage Component", () => {
     const story = createMockCountryStory({
       details: "",
     });
-    
+
     render(<CountryPage story={story} />);
-    
+
     // Quick details fields should still be rendered
     expect(screen.getByText("Official language")).toBeInTheDocument();
     expect(screen.getAllByText("Romanian")).toHaveLength(2); // One in hero, one in quick details
-    
+
     // Details title should not be rendered
     expect(screen.queryByText("Quick Facts")).not.toBeInTheDocument();
   });
 
   it("handles missing quick details gracefully", () => {
     const story = createMockCountryStory({
+      intro: [
+        {
+          _uid: "intro-uid",
+          title: "About Romania",
+          richText: { type: "doc", content: [] },
+          component: "TileAndRichText",
+        },
+      ],
       details: "",
       language: "",
       Language: "",
@@ -210,26 +220,65 @@ describe("CountryPage Component", () => {
       phone: "",
       domain: "",
     });
-    
+
     render(<CountryPage story={story} />);
-    
+
     // Hero should still be rendered
     expect(screen.getByText("Romania")).toBeInTheDocument();
-    
-    // Quick details section should not be rendered
-    expect(screen.queryByText("Official language")).not.toBeInTheDocument();
-  });
 
-  it("renders with population as number", () => {
-    const story = createMockCountryStory({
-      hero: [{
-        ...createMockCountryStory().content.hero[0],
-        population: 19000000,
-      }],
+    // Intro should be rendered but not quick details
+    expect(screen.getByText("About Romania")).toBeInTheDocument();
+    expect(screen.queryByText("Official language")).not.toBeInTheDocument();
+
+    it("renders with population as number", () => {
+      const story = createMockCountryStory({
+        hero: [
+          {
+            ...createMockCountryStory().content.hero[0],
+            population: 19000000,
+          },
+        ],
+      });
+
+      render(<CountryPage story={story} />);
+
+      expect(screen.getByText("19000000")).toBeInTheDocument();
     });
-    
-    render(<CountryPage story={story} />);
-    
-    expect(screen.getByText("19000000")).toBeInTheDocument();
+
+    it("renders curiosities section when curiosities are provided", () => {
+      const mockCuriosity = {
+        _uid: "curiosity-uid",
+        component: "imageAndRichText",
+        image: [
+          {
+            _uid: "gallery-image-uid",
+            image: mockImage,
+            title: "Test Curiosity",
+            component: "galleryImage",
+          },
+        ],
+        text: { type: "doc", content: [] },
+      };
+
+      const story = createMockCountryStory({
+        curiosities: [mockCuriosity],
+      });
+
+      render(<CountryPage story={story} />);
+
+      // Check that curiosities section exists with multiple images
+      expect(screen.getAllByTestId("country-hero-image")).toHaveLength(2); // Hero + Curiosity
+    });
+
+    it("does not render curiosities section when no curiosities", () => {
+      const story = createMockCountryStory({
+        curiosities: [],
+      });
+
+      render(<CountryPage story={story} />);
+
+      // Only hero image should be present
+      expect(screen.getAllByTestId("country-hero-image")).toHaveLength(1);
+    });
   });
 });

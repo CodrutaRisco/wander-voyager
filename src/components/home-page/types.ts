@@ -1,12 +1,13 @@
 // Types for the Storyblok HomePage
-import { StoryblokImage, StoryblokRichtext, StoryblokStory, StoryblokHero  } from "@/types";
+import {
+  StoryblokImage,
+  StoryblokRichtext,
+  StoryblokStory,
+  StoryblokHero,
+  GalleryImageBlock,
+} from "@/types";
 
-export interface GalleryImageBlock {
-  _uid: string;
-  image: StoryblokImage;
-  title: string;
-  component: "galleryImage";
-}
+
 
 export interface GalleryBlock {
   _uid: string;

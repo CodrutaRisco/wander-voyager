@@ -1,0 +1,95 @@
+
+/* Curiosities Section */
+.curiositiesSection {
+    margin: 3rem 0;
+    padding: 2rem 0;
+}
+
+.curiositiesTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #333;
+    margin-bottom: 3rem;
+}
+
+.curiositiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.curiosityCard {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.curiosityCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.curiosityImageContainer {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.curiosityImage {
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.curiosityCard:hover .curiosityImage {
+    transform: scale(1.05);
+}
+
+.curiosityContent {
+    padding: 1.5rem;
+}
+
+.curiosityTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 1rem;
+    line-height: 1.3;
+}
+
+.curiosityDescription {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.curiosityDescription p {
+    margin: 0 0 1rem;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.curiosityDescription p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .curiositiesGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .curiositiesTitle {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+    }
+}

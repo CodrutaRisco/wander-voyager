@@ -1,15 +1,19 @@
 import { renderRichText } from "@/lib/rich-text-renderer";
 import { Hero } from "../shared-ui";
 import type { CountryPageFeatureProps } from "./types";
-import { heroFields, quickDetailsFields } from "./utils";
 import styles from "./country-page.module.css";
 import { ComponentWrapper } from "@/components/shared-ui";
+import { CuriositiesCard } from "../shared-ui/curiosities-card/curiosities-card";
+import { QuickDetails } from "./quick-details/quick-details";
+import { HeroFields } from "./hero-fields/hero-fields";
 
 export function CountryPage({ story }: CountryPageFeatureProps) {
   const { content } = story;
 
   const heroCountryPage = content.hero?.[0]?.hero?.[0];
   const countryPageHero = content.hero?.[0];
+
+  const curiosities = content.curiosities;
 
   if (!heroCountryPage) {
     return null;
@@ -23,13 +27,14 @@ export function CountryPage({ story }: CountryPageFeatureProps) {
           subtitle={heroCountryPage.subtitle}
           image={heroCountryPage.image}
         >
-          {countryPageHero &&
-            heroFields(
-              countryPageHero.capital,
-              String(countryPageHero.population),
-              countryPageHero.currency,
-              countryPageHero.language,
-            )}
+          {countryPageHero && (
+            <HeroFields
+              capital={countryPageHero.capital}
+              population={String(countryPageHero.population)}
+              currency={countryPageHero.currency}
+              language={countryPageHero.language}
+            />
+          )}
         </Hero>
       )}
       <ComponentWrapper>
@@ -47,19 +52,24 @@ export function CountryPage({ story }: CountryPageFeatureProps) {
                 </div>
               </div>
             )}
-            {(content.details ||
-              content.language ||
-              content.Language ||
-              content.time ||
-              content.phone ||
-              content.domain) &&
-              quickDetailsFields(
-                content.details,
-                content.language ?? content.Language ?? "",
-                content.time,
-                content.phone,
-                content.domain,
-              )}
+            <QuickDetails
+              details={content.details}
+              language={content.language ?? content.Language ?? ""}
+              time={content.time}
+              phone={content.phone}
+              domain={content.domain}
+            />
+          </section>
+        )}
+
+        {/* Curiosities Section */}
+        {curiosities.length > 0 && (
+          <section className={styles.curiositiesSection}>
+            <div className={styles.curiositiesGrid}>
+              {curiosities.map((item) => (
+                <CuriositiesCard key={item._uid} {...item} />
+              ))}
+            </div>
           </section>
         )}
       </ComponentWrapper>
