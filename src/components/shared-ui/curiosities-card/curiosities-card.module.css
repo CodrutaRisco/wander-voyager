@@ -1,60 +1,38 @@
 
 /* Curiosities Section */
-.curiositiesSection {
-    margin: 3rem 0;
-    padding: 2rem 0;
-}
-
-.curiositiesTitle {
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    color: #333;
-    margin-bottom: 3rem;
-}
-
-.curiositiesGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.curiosityCard {
-    background: white;
-    border-radius: 12px;
+.curiosityCard{
+    /* position: relative; */
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .curiosityCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25);
 }
 
+
 .curiosityImageContainer {
-    position: relative;
-    width: 100%;
+   position: relative;
     height: 200px;
     overflow: hidden;
+    margin-bottom: 1.5rem;
 }
 
 .curiosityImage {
-    object-fit: cover;
-    transition: transform 0.3s ease;
+   object-fit: cover;
+   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .curiosityCard:hover .curiosityImage {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-.curiosityContent {
-    padding: 1.5rem;
-}
-
-.curiosityTitle {
+.curiositiesTitle {
     font-size: 1.5rem;
     font-weight: 600;
     color: #333;
@@ -62,34 +40,31 @@
     line-height: 1.3;
 }
 
-.curiosityDescription {
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0;
-}
-
-.curiosityDescription p {
+.curiositiesContent {
+    color: #4a4a4a;
+    text-align: left;
     margin: 0 0 1rem;
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.6;  
+    overflow-y: auto;
+    max-height: 4.8em;
+    -webkit-overflow-scrolling: touch; 
+    overscroll-behavior: contain; 
 }
 
-.curiosityDescription p:last-child {
-    margin-bottom: 0;
+
+.curiositiesContent::-webkit-scrollbar {
+    width: 4px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .curiositiesGrid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-    }
-    
-    .curiositiesTitle {
-        font-size: 1.75rem;
-        margin-bottom: 2rem;
-    }
+.curiositiesContent::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.curiositiesContent::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.curiosityDescription::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
 }

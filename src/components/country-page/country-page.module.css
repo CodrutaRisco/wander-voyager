@@ -3,13 +3,14 @@
 .introSection {
     display: flex;
     gap: 2.5rem;
-    align-items: flex-start;
+    align-items: self-start;
     padding: 2rem 0;
 }
 
 .intro {
-    min-width: 0;
-    flex: 1;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  text-align: left;
 }
 
 .introTitle {
@@ -19,13 +20,20 @@
 }
 
 .introContent {
-    line-height: 1.6;
+    line-height: 1.5;
+    line-height: 1.5;
+    text-align: left;
 }
 
-.introContent p {
-    /* font-size: 1.25rem;
-    line-height: 2; */
-    color: #4a4a4a;
-    text-align: left;
-    margin: 0 0 1rem;
+
+/* Curiosities Section */
+.curiositiesSection {
+    padding: 2rem 0;
+}
+
+.curiositiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    
 }
