@@ -1,0 +1,27 @@
+.heroFields {
+    display: flex;
+    gap: 2rem;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.heroFields .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.heroFields .label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.heroFields .value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+}

@@ -106,6 +106,19 @@ export interface StoryblokTitleAndRichText {
     component: 'tileAndRichText';
 }
 
+export interface StoryblokImageAndRichText {
+  _uid: string;
+  image: [GalleryImageBlock];
+  text: StoryblokRichtext[];
+  component: "imageAndRichText";
+}
+
+export interface GalleryImageBlock {
+  _uid: string;
+  image: StoryblokImage;
+  title: string;
+  component: "galleryImage";
+}
 // ==================== SEO Types ====================
 
 export interface StoryblokSeo {
