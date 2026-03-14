@@ -1,7 +1,6 @@
 import styles from "./quick-details.module.css";
 
 interface QuickDetailsProps {
-  details?: string;
   language?: string;
   time?: string;
   phone?: string;
@@ -9,18 +8,17 @@ interface QuickDetailsProps {
 }
 
 export function QuickDetails({ 
-  details, 
+
   language, 
   time, 
   phone, 
   domain 
 }: QuickDetailsProps) {
   const hasAny = language || time || phone || domain;
-  if (!details && !hasAny) return null;
 
   return (
     <aside className={styles.quickDetailsCard}>
-      {details && <h2 className={styles.quickDetailsCardTitle}>{details}</h2>}
+      <h2 className={styles.quickDetailsCardTitle}>Quick Details</h2>
       <dl className={styles.quickDetailsList}>
         {language && (
           <div className={styles.quickDetailsRow}>
