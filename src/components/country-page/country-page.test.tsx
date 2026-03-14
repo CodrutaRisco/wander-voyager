@@ -229,56 +229,56 @@ describe("CountryPage Component", () => {
     // Intro should be rendered but not quick details
     expect(screen.getByText("About Romania")).toBeInTheDocument();
     expect(screen.queryByText("Official language")).not.toBeInTheDocument();
+  });
 
-    it("renders with population as number", () => {
-      const story = createMockCountryStory({
-        hero: [
-          {
-            ...createMockCountryStory().content.hero[0],
-            population: 19000000,
-          },
-        ],
-      });
-
-      render(<CountryPage story={story} />);
-
-      expect(screen.getByText("19000000")).toBeInTheDocument();
+  it("renders with population as number", () => {
+    const story = createMockCountryStory({
+      hero: [
+        {
+          ...createMockCountryStory().content.hero[0],
+          population: 19000000,
+        },
+      ],
     });
 
-    it("renders curiosities section when curiosities are provided", () => {
-      const mockCuriosity = {
-        _uid: "curiosity-uid",
-        component: "imageAndRichText",
-        image: [
-          {
-            _uid: "gallery-image-uid",
-            image: mockImage,
-            title: "Test Curiosity",
-            component: "galleryImage",
-          },
-        ],
-        text: { type: "doc", content: [] },
-      };
+    render(<CountryPage story={story} />);
 
-      const story = createMockCountryStory({
-        curiosities: [mockCuriosity],
-      });
+    expect(screen.getByText("19000000")).toBeInTheDocument();
+  });
 
-      render(<CountryPage story={story} />);
+  it("renders curiosities section when curiosities are provided", () => {
+    const mockCuriosity = {
+      _uid: "curiosity-uid",
+      component: "imageAndRichText",
+      image: [
+        {
+          _uid: "gallery-image-uid",
+          image: mockImage,
+          title: "Test Curiosity",
+          component: "galleryImage",
+        },
+      ],
+      text: { type: "doc", content: [] },
+    };
 
-      // Check that curiosities section exists with multiple images
-      expect(screen.getAllByTestId("country-hero-image")).toHaveLength(2); // Hero + Curiosity
+    const story = createMockCountryStory({
+      curiosities: [mockCuriosity],
     });
 
-    it("does not render curiosities section when no curiosities", () => {
-      const story = createMockCountryStory({
-        curiosities: [],
-      });
+    render(<CountryPage story={story} />);
 
-      render(<CountryPage story={story} />);
+    // Check that curiosities section exists with multiple images
+    expect(screen.getAllByTestId("country-hero-image")).toHaveLength(2); // Hero + Curiosity
+  });
 
-      // Only hero image should be present
-      expect(screen.getAllByTestId("country-hero-image")).toHaveLength(1);
+  it("does not render curiosities section when no curiosities", () => {
+    const story = createMockCountryStory({
+      curiosities: [],
     });
+
+    render(<CountryPage story={story} />);
+
+    // Only hero image should be present
+    expect(screen.getAllByTestId("country-hero-image")).toHaveLength(1);
   });
 });
