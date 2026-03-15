@@ -4,14 +4,14 @@ interface HeroFieldsProps {
   capital: string;
   population: string;
   currency: string;
-  language: string;
+  climate: string;
 }
 
-export function HeroFields({ 
-  capital, 
-  population, 
-  currency, 
-  language 
+export function HeroFields({
+  capital,
+  population,
+  currency,
+  climate,
 }: HeroFieldsProps) {
   return (
     <section className={styles.heroFields}>
@@ -28,8 +28,8 @@ export function HeroFields({
         <span className={styles.value}>{currency}</span>
       </div>
       <div className={styles.field}>
-        <span className={styles.label}>Language:</span>
-        <span className={styles.value}>{language}</span>
+        <span className={styles.label}>Climate:</span>
+        <span className={styles.value}>{climate}</span>
       </div>
     </section>
   );

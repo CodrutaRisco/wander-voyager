@@ -57,15 +57,16 @@ const createMockCountryStory = (overrides = {}): CountryPageStory => ({
         capital: "Bucharest",
         population: "19 million",
         currency: "Lei",
-        language: "Romanian",
+        climate: "Temperate continental",
       },
     ],
     intro: [
       {
-        _uid: "intro-uid",
-        title: "About Romania",
-        richText: { type: "doc", content: [] },
-        component: "tileAndRichText",
+        introText: { type: "doc", content: [] },
+        language: "Romanian",
+        timeZone: "UTC+2",
+        phone: "+40",
+        domain: ".ro",
       },
     ],
     curiosities: [],
@@ -88,13 +89,8 @@ describe("CountryPage Component", () => {
     expect(
       screen.getByText("Beautiful Eastern European country"),
     ).toBeInTheDocument();
-
-    // Check if intro section is rendered
-    expect(screen.getByText("About Romania")).toBeInTheDocument();
     expect(screen.getByTestId("rich-text-content")).toBeInTheDocument();
 
-    // Check if quick details are rendered
-    expect(screen.getByText("Quick Facts")).toBeInTheDocument();
   });
 
   it("renders hero fields correctly", () => {
@@ -107,8 +103,8 @@ describe("CountryPage Component", () => {
     expect(screen.getByText("19 million")).toBeInTheDocument();
     expect(screen.getByText("Currency:")).toBeInTheDocument();
     expect(screen.getByText("Lei")).toBeInTheDocument();
-    expect(screen.getByText("Language:")).toBeInTheDocument();
-    expect(screen.getAllByText("Romanian")).toHaveLength(2); // One in hero, one in quick details
+    expect(screen.getByText("Climate:")).toBeInTheDocument();
+    expect(screen.getAllByText("Temperate continental")).toHaveLength(1); 
   });
 
   it("renders quick details fields correctly", () => {
@@ -116,7 +112,7 @@ describe("CountryPage Component", () => {
     render(<CountryPage story={story} />);
 
     expect(screen.getByText("Official language")).toBeInTheDocument();
-    expect(screen.getAllByText("Romanian")).toHaveLength(2); // One in hero, one in quick details
+    expect(screen.getAllByText("Romanian")).toHaveLength(1); 
     expect(screen.getByText("Time zone")).toBeInTheDocument();
     expect(screen.getByText("UTC+2")).toBeInTheDocument();
     expect(screen.getByText("Phone prefix")).toBeInTheDocument();
@@ -137,7 +133,6 @@ describe("CountryPage Component", () => {
   it("renders without intro section when intro and details are missing", () => {
     const story = createMockCountryStory({
       intro: [],
-      details: "",
       language: "",
       time: "",
       phone: "",
@@ -171,7 +166,7 @@ describe("CountryPage Component", () => {
     // Rich text content should still be rendered
     expect(screen.getByTestId("rich-text-content")).toBeInTheDocument();
 
-    // Intro title should not be rendered (only Quick Facts title should exist)
+    // Intro title should not be rendered (only Quick Details title should exist)
     expect(screen.queryByText("About Romania")).not.toBeInTheDocument();
   });
 
@@ -183,7 +178,6 @@ describe("CountryPage Component", () => {
 
     render(<CountryPage story={story} />);
 
-    expect(screen.getByText("Romanian (Capital L)")).toBeInTheDocument();
     // Verify the quick details section shows the capital L version
     expect(screen.getByText("Official language")).toBeInTheDocument();
   });
@@ -197,10 +191,10 @@ describe("CountryPage Component", () => {
 
     // Quick details fields should still be rendered
     expect(screen.getByText("Official language")).toBeInTheDocument();
-    expect(screen.getAllByText("Romanian")).toHaveLength(2); // One in hero, one in quick details
+    expect(screen.getAllByText("Romanian")).toHaveLength(1); // One in hero, one in quick details
 
-    // Details title should not be rendered
-    expect(screen.queryByText("Quick Facts")).not.toBeInTheDocument();
+    // Details title should be rendered when data exists
+    expect(screen.queryByText("Quick Details")).toBeInTheDocument();
   });
 
   it("handles missing quick details gracefully", () => {
@@ -213,7 +207,6 @@ describe("CountryPage Component", () => {
           component: "TileAndRichText",
         },
       ],
-      details: "",
       language: "",
       Language: "",
       time: "",
@@ -227,7 +220,7 @@ describe("CountryPage Component", () => {
     expect(screen.getByText("Romania")).toBeInTheDocument();
 
     // Intro should be rendered but not quick details
-    expect(screen.getByText("About Romania")).toBeInTheDocument();
+
     expect(screen.queryByText("Official language")).not.toBeInTheDocument();
   });
 

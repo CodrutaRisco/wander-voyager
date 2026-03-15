@@ -8,19 +8,24 @@ interface QuickDetailsProps {
   domain?: string;
 }
 
-export function QuickDetails({ 
-  details, 
-  language, 
-  time, 
-  phone, 
-  domain 
+export function QuickDetails({
+  language,
+  time,
+  phone,
+  domain,
 }: QuickDetailsProps) {
   const hasAny = language || time || phone || domain;
-  if (!details && !hasAny) return null;
+
+  // Return null if no props are provided
+  if (!hasAny) {
+    return null;
+  }
 
   return (
     <aside className={styles.quickDetailsCard}>
-      {details && <h2 className={styles.quickDetailsCardTitle}>{details}</h2>}
+      {hasAny && (
+        <h2 className={styles.quickDetailsCardTitle}>Quick Details</h2>
+      )}
       <dl className={styles.quickDetailsList}>
         {language && (
           <div className={styles.quickDetailsRow}>
