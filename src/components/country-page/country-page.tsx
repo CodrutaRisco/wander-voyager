@@ -41,7 +41,6 @@ export function CountryPage({ story }: CountryPageFeatureProps) {
         {countryIntro && (
           <CountryIntro
             introText={countryIntro.introText}
-            details={content.details}
             language={countryIntro.language}
             timeZone={countryIntro.timeZone}
             phone={countryIntro.phone}

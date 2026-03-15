@@ -133,7 +133,6 @@ describe("CountryPage Component", () => {
   it("renders without intro section when intro and details are missing", () => {
     const story = createMockCountryStory({
       intro: [],
-      details: "",
       language: "",
       time: "",
       phone: "",
@@ -179,7 +178,6 @@ describe("CountryPage Component", () => {
 
     render(<CountryPage story={story} />);
 
-    // expect(screen.getByText("Romanian (Capital L)")).toBeInTheDocument();
     // Verify the quick details section shows the capital L version
     expect(screen.getByText("Official language")).toBeInTheDocument();
   });
@@ -195,8 +193,8 @@ describe("CountryPage Component", () => {
     expect(screen.getByText("Official language")).toBeInTheDocument();
     expect(screen.getAllByText("Romanian")).toHaveLength(1); // One in hero, one in quick details
 
-    // Details title should not be rendered
-    expect(screen.queryByText("Quick Details")).not.toBeInTheDocument();
+    // Details title should be rendered when data exists
+    expect(screen.queryByText("Quick Details")).toBeInTheDocument();
   });
 
   it("handles missing quick details gracefully", () => {
@@ -209,7 +207,6 @@ describe("CountryPage Component", () => {
           component: "TileAndRichText",
         },
       ],
-      details: "",
       language: "",
       Language: "",
       time: "",
@@ -223,7 +220,7 @@ describe("CountryPage Component", () => {
     expect(screen.getByText("Romania")).toBeInTheDocument();
 
     // Intro should be rendered but not quick details
-    // expect(screen.getByText("About Romania")).toBeInTheDocument();
+
     expect(screen.queryByText("Official language")).not.toBeInTheDocument();
   });
 

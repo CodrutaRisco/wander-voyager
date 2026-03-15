@@ -9,7 +9,6 @@ interface QuickDetailsProps {
 }
 
 export function QuickDetails({
-  details,
   language,
   time,
   phone,
@@ -24,7 +23,7 @@ export function QuickDetails({
 
   return (
     <aside className={styles.quickDetailsCard}>
-      {details && (
+      {hasAny && (
         <h2 className={styles.quickDetailsCardTitle}>Quick Details</h2>
       )}
       <dl className={styles.quickDetailsList}>

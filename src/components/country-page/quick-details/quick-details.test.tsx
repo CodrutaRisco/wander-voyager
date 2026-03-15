@@ -38,12 +38,13 @@ describe("QuickDetails Component", () => {
     expect(title).toHaveClass("quickDetailsCardTitle");
   });
 
-  it("does not render title when details is empty", () => {
+  it("renders title when details is empty but data exists", () => {
     const props = createMockQuickDetailsProps({ details: "" });
     render(<QuickDetails {...props} />);
-    
+
     const title = screen.queryByRole("heading", { level: 2 });
-    expect(title).not.toBeInTheDocument();
+    expect(title).toBeInTheDocument();
+    expect(title).toHaveTextContent("Quick Details");
   });
 
   it("renders all detail fields correctly", () => {
@@ -95,17 +96,18 @@ describe("QuickDetails Component", () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it("renders without title but with fields when only fields provided", () => {
+  it("renders with title and fields when fields provided", () => {
     const noTitleProps = createMockQuickDetailsProps({
       details: "",
       language: "Spanish",
       time: "UTC-5",
     });
     render(<QuickDetails {...noTitleProps} />);
-    
+
     const title = screen.queryByRole("heading");
-    expect(title).not.toBeInTheDocument();
-    
+    expect(title).toBeInTheDocument();
+    expect(title).toHaveTextContent("Quick Details");
+
     expect(screen.getByText("Official language")).toBeInTheDocument();
     expect(screen.getByText("Spanish")).toBeInTheDocument();
   });
