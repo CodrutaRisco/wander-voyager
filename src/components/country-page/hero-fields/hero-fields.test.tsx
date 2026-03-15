@@ -6,14 +6,14 @@ interface HeroFieldsProps {
   capital: string;
   population: string;
   currency: string;
-  language: string;
+  climate: string;
 }
 
 const createMockHeroFieldsProps = (overrides = {}): HeroFieldsProps => ({
   capital: "Bucharest",
   population: "19 million",
   currency: "Lei",
-  language: "Romanian",
+  climate: "Temperate continental",
   ...overrides,
 });
 
@@ -34,7 +34,7 @@ describe("HeroFields Component", () => {
     expect(screen.getByText("Capital:")).toBeInTheDocument();
     expect(screen.getByText("Population:")).toBeInTheDocument();
     expect(screen.getByText("Currency:")).toBeInTheDocument();
-    expect(screen.getByText("Language:")).toBeInTheDocument();
+    expect(screen.getByText("Climate:")).toBeInTheDocument();
   });
 
   it("renders all field values correctly", () => {
@@ -44,7 +44,7 @@ describe("HeroFields Component", () => {
     expect(screen.getByText("Bucharest")).toBeInTheDocument();
     expect(screen.getByText("19 million")).toBeInTheDocument();
     expect(screen.getByText("Lei")).toBeInTheDocument();
-    expect(screen.getAllByText("Romanian")).toHaveLength(1);
+    expect(screen.getByText("Temperate continental")).toBeInTheDocument();
   });
 
   it("renders with custom values", () => {
@@ -52,14 +52,14 @@ describe("HeroFields Component", () => {
       capital: "Paris",
       population: "67 million",
       currency: "Euro",
-      language: "French",
+      climate: "Mediterranean",
     });
     render(<HeroFields {...customProps} />);
     
     expect(screen.getByText("Paris")).toBeInTheDocument();
     expect(screen.getByText("67 million")).toBeInTheDocument();
     expect(screen.getByText("Euro")).toBeInTheDocument();
-    expect(screen.getByText("French")).toBeInTheDocument();
+    expect(screen.getByText("Mediterranean")).toBeInTheDocument();
   });
 
   it("renders with empty values", () => {
@@ -67,7 +67,7 @@ describe("HeroFields Component", () => {
       capital: "",
       population: "",
       currency: "",
-      language: "",
+      climate: "",
     });
     render(<HeroFields {...emptyProps} />);
     
@@ -75,7 +75,7 @@ describe("HeroFields Component", () => {
     expect(screen.getByText("Capital:")).toBeInTheDocument();
     expect(screen.getByText("Population:")).toBeInTheDocument();
     expect(screen.getByText("Currency:")).toBeInTheDocument();
-    expect(screen.getByText("Language:")).toBeInTheDocument();
+    expect(screen.getByText("Climate:")).toBeInTheDocument();
   });
 
   it("has proper CSS structure with field containers", () => {
@@ -113,23 +113,26 @@ describe("HeroFields Component", () => {
     expect(labels[2]).toHaveTextContent("Currency:");
     expect(values[2]).toHaveTextContent("Lei");
     
-    expect(labels[3]).toHaveTextContent("Language:");
-    expect(values[3]).toHaveTextContent("Romanian");
+    expect(labels[3]).toHaveTextContent("Climate:");
+    expect(values[3]).toHaveTextContent("Temperate continental");
   });
 
   it("renders with very long values", () => {
     const longProps = createMockHeroFieldsProps({
       capital: "A Very Long Capital Name That Might Overflow",
-      population: "123,456,789,012 people with detailed demographic information",
+      population:
+        "123,456,789,012 people with detailed demographic information",
       currency: "A Currency With A Really Long Name",
-      language: "Multiple Languages Including English, Spanish, French, German, Italian",
+      climate: "A Very Long Climate Description That Might Overflow",
     });
     render(<HeroFields {...longProps} />);
     
     expect(screen.getByText("A Very Long Capital Name That Might Overflow")).toBeInTheDocument();
     expect(screen.getByText("123,456,789,012 people with detailed demographic information")).toBeInTheDocument();
     expect(screen.getByText("A Currency With A Really Long Name")).toBeInTheDocument();
-    expect(screen.getByText("Multiple Languages Including English, Spanish, French, German, Italian")).toBeInTheDocument();
+    expect(
+      screen.getByText("A Very Long Climate Description That Might Overflow"),
+    ).toBeInTheDocument();
   });
 
   it("renders with numeric population values", () => {

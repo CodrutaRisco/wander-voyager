@@ -5,6 +5,7 @@ import { QuickDetails } from '../quick-details/quick-details';
 
 interface CountryIntroProps {
   introText: StoryblokRichtext;
+  details: string;
   language: string;
   timeZone: string;
   phone: string;
@@ -12,25 +13,28 @@ interface CountryIntroProps {
 }
 
 
-export function CountryIntro({introText,language,timeZone,phone,domain}: CountryIntroProps) {
+export function CountryIntro({
+  introText,
+  details,
+  language,
+  timeZone,
+  phone,
+  domain,
+}: CountryIntroProps) {
   return (
     <section className={styles.introSection}>
-    <div className={styles.intro}>
-               
-                  <h2 className={styles.introTitle}>
-                   Introduction
-                  </h2>
-            
-                <div className={styles.introContent}>
-                  {renderRichText(introText)}
-                </div>
-              </div>
+      <div className={styles.intro}>
+        <h2 className={styles.introTitle}>Introduction</h2>
+
+        <div className={styles.introContent}>{renderRichText(introText)}</div>
+      </div>
       <QuickDetails
-                    language={language}
-                    time={timeZone}
-                    phone={phone}
-                    domain={domain}
-                  />
+        details={details}
+        language={language}
+        time={timeZone}
+        phone={phone}
+        domain={domain}
+      />
     </section>
   );
 }

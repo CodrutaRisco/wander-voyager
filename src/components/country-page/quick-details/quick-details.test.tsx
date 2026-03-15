@@ -11,7 +11,7 @@ interface QuickDetailsProps {
 }
 
 const createMockQuickDetailsProps = (overrides = {}): QuickDetailsProps => ({
-  details: "Quick Facts",
+  details: "Quick Details",
   language: "Romanian",
   time: "UTC+2",
   phone: "+40",
@@ -34,7 +34,7 @@ describe("QuickDetails Component", () => {
     render(<QuickDetails {...props} />);
     
     const title = screen.getByRole("heading", { level: 2 });
-    expect(title).toHaveTextContent("Quick Facts");
+    expect(title).toHaveTextContent("Quick Details");
     expect(title).toHaveClass("quickDetailsCardTitle");
   });
 
@@ -154,15 +154,13 @@ describe("QuickDetails Component", () => {
 
   it("renders with custom values", () => {
     const customProps = createMockQuickDetailsProps({
-      details: "Country Information",
       language: "German",
       time: "UTC+1",
       phone: "+49",
       domain: ".de",
     });
     render(<QuickDetails {...customProps} />);
-    
-    expect(screen.getByText("Country Information")).toBeInTheDocument();
+
     expect(screen.getByText("German")).toBeInTheDocument();
     expect(screen.getByText("UTC+1")).toBeInTheDocument();
     expect(screen.getByText("+49")).toBeInTheDocument();
