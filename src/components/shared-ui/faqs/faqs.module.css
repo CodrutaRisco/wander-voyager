@@ -1,0 +1,53 @@
+
+/* FAQ Section */
+.faqSection {
+    padding: 3rem 0;
+    background-color: #f8f9fa;
+}
+
+.faqTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2d3748;
+}
+
+.faqGrid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.faqItem {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.faqQuestion {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.faqAnswer {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #4a5568;
+}
+
+/* Clean up rich text spans */
+.faqAnswer p {
+    margin: 0;
+}
+
+.faqAnswer span[style*="color: #000000"] {
+    color: inherit !important;
+}
