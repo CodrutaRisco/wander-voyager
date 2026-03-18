@@ -5,6 +5,7 @@ import { ComponentWrapper } from "@/components/shared-ui";
 import { CuriositiesCard } from "../shared-ui/curiosities-card/curiosities-card";
 import { HeroFields } from "./hero-fields/hero-fields";
 import { CountryIntro } from "./country-intro/country-intro";
+import { FAQs } from "../shared-ui/faqs/faqs";
 
 export function CountryPage({ story }: CountryPageFeatureProps) {
   const { content } = story;
@@ -12,6 +13,7 @@ export function CountryPage({ story }: CountryPageFeatureProps) {
   const heroCountryPage = content.hero?.[0]?.hero?.[0];
   const countryPageHero = content.hero?.[0];
   const countryIntro = content.intro?.[0];
+  const countryFaqs = content.facs; // Array de FAQ-uri, nu primul element
 
   const curiosities = content.curiosities;
 
@@ -58,6 +60,7 @@ export function CountryPage({ story }: CountryPageFeatureProps) {
             </div>
           </section>
         )}
+        {countryFaqs && countryFaqs.length > 0 && <FAQs faqs={countryFaqs} />}
       </ComponentWrapper>
     </>
   );
