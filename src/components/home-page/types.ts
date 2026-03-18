@@ -5,21 +5,13 @@ import {
   StoryblokStory,
   StoryblokHero,
   GalleryImageBlock,
+  TileAndRichTextBlock,
 } from "@/types";
-
-
 
 export interface GalleryBlock {
   _uid: string;
   images: GalleryImageBlock[];
   component: "Gallery";
-}
-
-export interface TileAndRichTextBlock {
-  _uid: string;
-  title: string;
-  richText: StoryblokRichtext;
-  component: string;
 }
 
 export interface VideoComponentBlock {
