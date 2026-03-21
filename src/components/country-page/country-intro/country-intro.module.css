@@ -1,9 +1,14 @@
 /* Intro + Quick Details side-by-side */
 .introSection {
     display: flex;
-    gap: 2.5rem;
-    align-items: self-start;
-    padding: 2rem 0;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    @media (min-width: 1024px) {
+        flex-direction: row;
+        gap: 2.5rem;
+        align-items: center;
+    }
+   
 }
 
 .intro {
