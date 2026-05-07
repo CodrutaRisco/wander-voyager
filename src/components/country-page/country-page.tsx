@@ -51,6 +51,7 @@ export function CountryPage({ story }: CountryPageFeatureProps) {
         {/* Curiosities Section */}
         {curiosities.length > 0 && (
           <section className={styles.curiositiesSection}>
+            <h2 className={styles.curiositiesTitle}>Curiosities</h2>
             <div className={styles.curiositiesGrid}>
               {curiosities.map((item) => (
                 <CuriositiesCard key={item._uid} {...item} />
