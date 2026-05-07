@@ -11,6 +11,7 @@ export function CountrieCard({ countrieName, subtitle, image }: CountrieCardBloc
           src={image.filename}
           alt={image.alt || countrieName}
           fill
+          sizes="(min-width: 1024px) 300px, 100vw"
           className={styles.countryImage}
         />
       </div>

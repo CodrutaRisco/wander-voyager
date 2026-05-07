@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-family);
-  background-color: var(--color-background);
 }
 
 .main {

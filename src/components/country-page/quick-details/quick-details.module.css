@@ -1,13 +1,13 @@
 /* Quick Details card (right column) */
 .quickDetailsCard {
-    flex: 0 0 320px;
-    max-width: 100%;
+    overflow: hidden;
     background: #e8eef2;
     border-radius: 8px;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    border: none;
+    
+    @media (min-width: 1024px) {
+        flex: 0 0 320px;
+        max-width: 100%;
+    }
 }
 
 .quickDetailsCard::before {
@@ -35,7 +35,13 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 1rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid#6790a5;
+}
+
+.quickDetailsRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .quickDetailsLabel {
@@ -59,15 +65,5 @@
     padding: 0.2em 0.5em;
     border-radius: 4px;
     font-size: 0.95em;
-}
-
-@media (max-width: 768px) {
-    .introSection {
-        flex-direction: column;
-    }
-
-    .quickDetailsCard {
-        width: 100%;
-    }
 }
 
