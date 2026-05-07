@@ -11,7 +11,6 @@ interface CountryIntroProps {
   domain: string;
 }
 
-
 export function CountryIntro({
   introText,
   language,
@@ -23,8 +22,7 @@ export function CountryIntro({
     <section className={styles.introSection}>
       <div className={styles.intro}>
         <h2 className={styles.introTitle}>Introduction</h2>
-
-        <div className={styles.introContent}>{renderRichText(introText)}</div>
+        <div>{renderRichText(introText)}</div>
       </div>
       <QuickDetails
         language={language}
