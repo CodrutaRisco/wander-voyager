@@ -1,0 +1,100 @@
+/* FAQ Section - Clean Accordion Style */
+.faqSection {
+    padding: 3rem 6rem;
+    /* background-color: #f8f9fa; Light grey background like in image */
+}
+
+.faqTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2d3748;
+}
+
+.faqGrid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between FAQ items */
+}
+
+/* Accordion style FAQ items with rounded corners */
+.faqItem {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* For rounded corners */
+}
+
+.faqQuestion {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #374151;
+    padding: 20px 24px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    /* outline: none; */
+    transition: background-color 0.3s ease;
+    font-size: 1.125rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Refined chevron arrow */
+.faqQuestion::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #6b7280;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.faqQuestion[data-open="true"]::after {
+    transform: rotate(180deg);
+}
+
+/* Hover effect - slightly darker grey */
+.faqQuestion:hover {
+    background-color: #e5e7eb;
+}
+
+.faqQuestion:focus {
+    outline: none;
+    background-color: #e5e7eb;
+}
+
+/* Panel style */
+.faqAnswer {
+    padding: 0;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faqAnswerOpen {
+    max-height: 1000px;
+    padding: 20px 24px;
+}
+
+.faqContent {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a5568;
+}
+
+/* Clean up rich text spans */
+.faqAnswer p {
+    margin: 0 0 0.5rem 0;
+}
+
+.faqAnswer span[style*="color: #000000"] {
+    color: inherit !important;
+}

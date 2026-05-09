@@ -113,6 +113,13 @@ export interface StoryblokImageAndRichText {
   component: "imageAndRichText";
 }
 
+export interface TileAndRichTextBlock {
+  _uid: string;
+  title: string;
+  richText: StoryblokRichtext;
+  component: string;
+}
+
 export interface GalleryImageBlock {
   _uid: string;
   image: StoryblokImage;

@@ -3,6 +3,7 @@ import {
   StoryblokImageAndRichText,
   StoryblokRichtext,
   StoryblokStory,
+  TileAndRichTextBlock,
 } from "@/types";
 
 
@@ -34,6 +35,7 @@ export interface CountryPageStoryContent {
   phone: string;
   domain: string;
   curiosities: StoryblokImageAndRichText[];
+  facs: TileAndRichTextBlock[];
 }
 
 export type CountryPageStory = StoryblokStory<CountryPageStoryContent>;
