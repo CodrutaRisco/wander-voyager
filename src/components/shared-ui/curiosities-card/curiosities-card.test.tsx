@@ -1,14 +1,14 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { CuriositiesCard } from "./curiosities-card";
 import type { StoryblokImageAndRichText } from "@/types";
 
 // Mock next/image
 jest.mock("next/image", () => ({
   __esModule: true,
-  default: ({ src, alt, fill, className }: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean }) => {
+  default: ({ src, alt, fill, className, sizes }: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; sizes?: string }) => {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} className={className} data-fill={fill} data-testid="curiosity-image" />;
+    return <img src={src} alt={alt} className={className} data-fill={fill} data-sizes={sizes} data-testid="curiosity-image" />;
   },
 }));
 
@@ -94,6 +94,7 @@ describe("CuriositiesCard Component", () => {
     expect(image).toHaveAttribute("src", mockImage.filename);
     expect(image).toHaveAttribute("alt", mockImage.alt);
     expect(image).toHaveAttribute("data-fill", "true");
+    expect(image).toHaveAttribute("data-sizes", "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw");
   });
 
   it("renders with fallback alt text when image alt is missing", () => {
@@ -171,6 +172,25 @@ describe("CuriositiesCard Component", () => {
 
     const image = imageContainer?.querySelector("img");
     expect(image).toBeInTheDocument();
+  });
+
+  it("opens and closes the modal when the card is clicked", () => {
+    const props = createMockCuriosityProps();
+    const { container } = render(<CuriositiesCard {...props} />);
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    const article = container.querySelector("article");
+    expect(article).toBeInTheDocument();
+
+    fireEvent.click(article!);
+
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Test Curiosity" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /close modal/i }));
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   // it("has proper CSS classes applied", () => {
