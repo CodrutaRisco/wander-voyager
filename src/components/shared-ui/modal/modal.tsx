@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./modal.module.css";
+import { useEffect } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,6 +10,23 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, children }: ModalProps) {
+  // if (!isOpen) return null;
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -28,9 +46,6 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
         >
           &times;
         </button>
-        {/* <h2 id="curiosity-modal-title" className={styles.title}>
-          {title}
-        </h2> */}
         <div className={styles.content}>{children}</div>
       </div>
     </div>
