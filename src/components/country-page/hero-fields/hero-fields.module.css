@@ -1,9 +1,34 @@
 .heroFields {
-    display: flex;
+     color: #fff;
+    /* text-align: left; */
+
+    background: #ffffff1a;
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid #fff6;
+  
+    border-radius: 0.75rem; 
+    align-items: center;
     gap: 2rem;
-    color: #fff;
-    text-align: left;
+
     margin-bottom: 1rem;
+    padding: 1.5rem 2rem;
+
+    box-shadow: 0 8px 32px #0003;
+
+     display: flex;
+    flex-direction: column;
+   
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+        gap: 2.5rem;
+        align-items: center;
+        border-radius: 999px;
+       
+    }
+    
 }
 
 .heroFields .field {
@@ -24,4 +49,17 @@
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.2;
+}
+
+
+.introSection {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+        gap: 2.5rem;
+        align-items: center;
+    }
 }
